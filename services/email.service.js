@@ -3,20 +3,13 @@ dotenv.config();
 
 import nodemailer from 'nodemailer';
 
-// Verificamos que las variables necesarias estén presentes
-const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, RECEIVER_EMAIL } = process.env;
-
-if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !RECEIVER_EMAIL) {
-    throw new Error('Faltan variables de entorno para configurar el transporte de correo.');
-}
-
 const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: SMTP_SECURE === 'true',
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: process.env.SMTP_SECURE === 'true',
     auth: {
-        user: SMTP_USER,   // Tu email
-        pass: SMTP_PASS    // Tu contraseña o app password
+        user: process.env.SMTP_USER,   // Tu email
+        pass: process.env.SMTP_PASS    // Tu contraseña o app password
     }
 });
 
@@ -27,7 +20,7 @@ export const sendEmail = async ({ nombre, email, mensaje }) => {
 
     const mailOptions = {
         from: `"${nombre}" <${email}>`,
-        to: RECEIVER_EMAIL, // A donde quieres recibir el mensaje
+        to: process.env.RECEIVER_EMAIL, // A donde quieres recibir el mensaje
         subject: 'Nuevo mensaje de portafolio',
         html: `
         <h2>Nuevo mensaje de contacto 🚀</h2>
