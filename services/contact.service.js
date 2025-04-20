@@ -14,7 +14,7 @@ export const saveContactMessage = async ({ nombre, email, mensaje }) => {
 
     if (error) {
         console.error('❌ Error al insertar en Supabase:', error);
-        throw new Error(`Error al guardar mensaje: ${error.message}`);
+        throw new Error(`Error al guardar mensaje en la base de datos: ${error.message}`);
     }
 
     // Log en desarrollo
@@ -22,5 +22,11 @@ export const saveContactMessage = async ({ nombre, email, mensaje }) => {
         console.log('✅ Mensaje guardado:', data);
     }
 
-    return data;
+
+    return {
+        success: true,
+        message: 'Mensaje guardado correctamente.',
+        data: data
+    };
+
 };
