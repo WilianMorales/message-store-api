@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import pkg from './package.json' assert { type: "json" };
 
 import contactRoutes from './routes/contact.routes.js';
 
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
     res.json({
         status: 'ok',
         message: 'API funcionando correctamente 🚀',
-        version: '1.0.0',
+        version:  pkg.version,
         environment: process.env.NODE_ENV || 'development'
     });
 });
