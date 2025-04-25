@@ -9,7 +9,7 @@ export const saveContactMessage = async ({ nombre, email, mensaje, ip, userAgent
                 nombre,
                 email,
                 mensaje,
-                ip,
+                ip_address: ip,
                 user_agent: userAgent
             }])
             .select();
