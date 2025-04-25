@@ -9,13 +9,18 @@ export const submitContactForm = async (req, res) => {
     }
 
     const { nombre, email, mensaje } = req.body;
+    const ip = req.ip
+    const userAgent = req.get('User-Agent')
+
+    // Log para depuración
+    console.log(`📩 Nueva solicitud desde IP: ${ip}, Navegador: ${userAgent}`)
 
     try {
         // Mandar el correo
         await sendEmail({ nombre, email, mensaje });
 
         // Guardar en la base de datos
-        const { success, message, data } = await saveContactMessage({ nombre, email, mensaje });
+        const { success, message, data } = await saveContactMessage({ nombre, email, mensaje, ip, userAgent });
 
         // Verificar si el mensaje se guardó correctamente
         if (success) {

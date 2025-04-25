@@ -7,17 +7,35 @@ import healthRoutes from './routes/health.routes.js';
 
 dotenv.config();
 
+import rateLimit from 'express-rate-limit';
+
 const app = express();
 
+// Trust proxy si estás en Railway
+app.set('trust proxy', 1);
+
 // Middlewares
-app.use(cors());
+app.use(cors(
+    {
+        origin: 'https://wilianmorales.github.io',
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+    }
+));
 app.use(express.json());
 
 // Ruta de salud
 app.use('/', healthRoutes);
 
+// Limite de 5 solicitudes por minuto por IP
+const limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 5,
+    message: '⏳ Has alcanzado el límite de solicitudes. Intenta más tarde.'
+});
+
 // Rutas principales
-app.use('/api/contact', contactRoutes);
+app.use('/api/contact', limiter, contactRoutes);
 
 // Middleware de errores generales
 app.use((err, req, res, next) => {

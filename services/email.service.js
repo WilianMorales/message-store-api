@@ -31,11 +31,6 @@ export const sendEmail = async ({ nombre, email, mensaje }) => {
 
     try {
         const info = await transporter.sendMail(mailOptions);
-
-        if (process.env.NODE_ENV !== 'production') {
-            console.log('✅ Correo enviado:', info.response);
-        }
-
         return info;
     } catch (error) {
         console.error('❌ Error al enviar el correo:', error);
