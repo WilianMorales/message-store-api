@@ -68,10 +68,6 @@ npm install -g nodemon
 ```
 npm install express cors express-validator nodemailer dotenv
 ```
-* Node Fetch
-```
-npm i node-fetch
-```
 * Express-rate-limit
 ```
 npm install express-rate-limit

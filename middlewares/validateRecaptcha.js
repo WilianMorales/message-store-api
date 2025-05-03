@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import fetch from 'node-fetch';
-
 export const validateRecaptcha = async (req, res, next) => {
     const { recaptchaToken } = req.body;
 

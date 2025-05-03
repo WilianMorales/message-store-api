@@ -27,10 +27,10 @@ app.use(express.json());
 // Ruta de salud
 app.use('/', healthRoutes);
 
-// Limite de 5 solicitudes por minuto por IP
+// Limite de 2 solicitudes por minuto por IP
 const limiter = rateLimit({
     windowMs: 60 * 1000,
-    max: 5,
+    max: 2,
     message: '⏳ Has alcanzado el límite de solicitudes. Intenta más tarde.'
 });
 

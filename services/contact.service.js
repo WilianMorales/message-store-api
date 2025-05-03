@@ -1,6 +1,6 @@
 import { supabase } from '../config/supabase.js';
 
-export const saveContactMessage = async ({ nombre, email, mensaje, ip, userAgent }) => {
+export const saveContactMessage = async ({ nombre, email, mensaje, ip, userAgent, location }) => {
     try {
         // Insertar el mensaje en la base de datos
         const { data, error } = await supabase
@@ -10,7 +10,8 @@ export const saveContactMessage = async ({ nombre, email, mensaje, ip, userAgent
                 email,
                 mensaje,
                 ip_address: ip,
-                user_agent: userAgent
+                user_agent: userAgent,
+                ubicacion: location
             }])
             .select();
 
